@@ -15,14 +15,17 @@ function allPosPHP($string)
     $array = array();
     $i=0;
     $sum =0 ;
-    foreach(explode("PHP",$string) as $item)
+    $arr = explode("PHP",$string);
+    foreach($arr as $item)
     {
          $pos = strlen($item);
-         $array[$i] = ($pos - 1);
+         $array[$i] = ($pos);
          $i = $i+1;
          $sum = $sum + $pos;
     }
-    return $array;
+    foreach($array as $item){
+       echo $item."  ";
+    }
     
 }
 
@@ -71,11 +74,23 @@ function sevenDays()
     
 }
 
-
-function arrayOfWords()
+function recPrint($array , $len ,$i){
+    
+          if($i==$len)
+              return;
+          else 
+          {
+             echo "$array[$i]";
+             recPrint($array,$len,$i+1);
+          }
+}
+function arrayOfWords($string)
 {
     
-    $array = explode(" ",$string); 
+    $array = explode(" ",$string);
+    
+    recPrint($array,count($array),0);
+    
     
 }
 function spliteFour($string)
@@ -160,12 +175,8 @@ function stringFile($string1)
 function globalVar()
 {
     //print_r($GLOBALS); 
-    $ip = getenv('REMOTE_ADDR');
-
-// Or simply use a Superglobal ($_SERVER or $_ENV)
-    $ip = $_SERVER['GLOBAL'];
+    echo phpinfo(INFO_VARIABLES);
     
-    echo $ip;
 }
 
 function dateComp()
@@ -194,8 +205,9 @@ function twentyDays()
 
 function dateToArray()
 {
-     array_push(date('Y-m-d'),$array);
-     echo $array;
+     $date = date("Y/m/d");
+     $array = explode("/",$date);
+     print_r($array);
 }
 ?>
 <table border="1px">
@@ -221,7 +233,13 @@ function dateToArray()
     <tr><td>14. Find the length of string 1 & 2</td><td><?php lengths($string1,$string2);?></td></tr>
     <tr><td>15. Create file & write string 1 to that file using PHP functions.</td><td><?php stringFile($string1);?></td></tr>
     <tr><td>16. Print all Global varibles provided by PHP</td><td><?php globalVar();?></td></tr>
-    <tr><td>17. Usage and examples of Header (PHP)</td><td></td></tr>
+    <tr><td>17. Usage and examples of Header (PHP)</td><td>
+        1)Php header function will send a http header to the browser.<br/>
+        2)Not only does it send this header back to the browser, but it also returns a REDIRECT (302) status code to the browser unless the 201 or a 3xx status code has already been set.
+        <br />Here is example <br />
+        ?php<br />
+          header("Location: http://kirupa.com");<br />
+         ?><br /> *This will send a new location to the browser and it will immediately redirect.</td></tr>
     <tr><td>18. Redirect page 1 to page 2.</td><td>We have to remove a comment</td></tr>
     <tr><td>19. Compare two dates. (12-4-2010 & 12-5-2011). Calculate the days between these two dates.</td><td><?php dateComp();?></td></tr>
     <tr><td>20. Print date after 20 days from current date</td><td><?php echo twentyDays();?></td></tr>
