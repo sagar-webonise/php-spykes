@@ -1,5 +1,6 @@
+
 <?php
-$string1 = "PHP parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as PHP code. The parser then executes all of the code it finds until it runs into a PHP closing <br/> tag.";
+$string1 = 'PHP parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as PHP code. The parser then executes all of the code it finds until it runs into a PHP closing <br/> tag.';
 $string2 = "PHP does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used.";
 
 
@@ -69,6 +70,7 @@ function sevenDays()
     
 }
 
+
 function arrayOfWords()
 {
     
@@ -105,7 +107,7 @@ function divideAndComb($string)
 
 function removeHtml($string)
 {
-        
+    //we can use strip_tags() 
     while(1)
     {
     $pos1 = strpos($string, '<');
@@ -113,7 +115,7 @@ function removeHtml($string)
     
     if($pos1!=false && $pos2!=false && ($pos1<$pos2))
     {
-     while($pos1!=$pos2)
+     while($pos1!=($pos2+1))
      {
      $string[$pos1]='';
      $pos1++;     
@@ -143,12 +145,42 @@ function lengths($string1,$string2)
     
 }
 
-function strinFile($string1)
+function stringFile($string1)
 {
-    $file = "string1.txt";
+    $file = "string1.text";
     $fp = fopen($file, 'w');
     fwrite($fp, $string1);
     fclose($fp);
+    echo "string1 written to file string1.text please have a look in current folder";
+    
+}
+
+function globalVar()
+{
+    print_r($GLOBALS); 
+}
+
+function dateComp()
+{
+    $date1 =new DateTime("12/4/2010");
+    $date2 =new DateTime("12/5/2011");
+   if($date1>$date2)
+        echo "12/4/2010 is greater than 12/5/2011";
+    else {
+        echo "12/4/2010 is less than 12/5/2011";
+    }
+    
+    $diff = (abs(strtotime($date2) - strtotime($date1)))/(60 * 60 * 24);
+
+    echo "<br/>$diff";
+        
+    
+}
+
+function twentyDays()
+{
+    $date = strtotime("+20 day", strtotime(date("Y/m/d")));
+    return date("Y/m/d", $date);
     
 }
 ?>
@@ -173,12 +205,12 @@ function strinFile($string1)
     <tr><td>12. Remove the HTML characters from string.</td><td><?php removeHtml($string1);?></td></tr>
     <tr><td>13. Print the 'PHP' word from string 1 by traversing it using string functions</td><td><?php printPhpTrav($string1);?></td></tr>
     <tr><td>14. Find the length of string 1 & 2</td><td><?php lengths($string1,$string2);?></td></tr>
-    <tr><td>15. Create file & write string 1 to that file using PHP functions.</td><td><?php strinFile($string1);?></td></tr>
-    <tr><td>16. Print all Global varibles provided by PHP</td><td></td></tr>
+    <tr><td>15. Create file & write string 1 to that file using PHP functions.</td><td><?php stringFile($string1);?></td></tr>
+    <tr><td>16. Print all Global varibles provided by PHP</td><td><?php globalVar();?></td></tr>
     <tr><td>17. Usage and examples of Header (PHP)</td><td></td></tr>
     <tr><td>18. Redirect page 1 to page 2.</td><td></td></tr>
-    <tr><td>19. Compare two dates. (12-4-2010 & 12-5-2011). Calculate the days between these two dates.</td><td></td></tr>
-    <tr><td>20. Print date after 20 days from current date</td><td></td></tr>
+    <tr><td>19. Compare two dates. (12-4-2010 & 12-5-2011). Calculate the days between these two dates.</td><td><?php dateComp();?></td></tr>
+    <tr><td>20. Print date after 20 days from current date</td><td><?php echo twentyDays();?></td></tr>
     <tr><td>21. Print date in array format.</td><td></td></tr>
    
         
