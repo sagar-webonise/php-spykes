@@ -1,5 +1,6 @@
 
 <?php
+//header('Location: hello.php');
 $string1 = 'PHP parses a file by looking for <br/> one of the special tags that tells it to start interpreting the text as PHP code. The parser then executes all of the code it finds until it runs into a PHP closing <br/> tag.';
 $string2 = "PHP does not require (or support) explicit type definition in variable declaration; a variable's type is determined by the context in which the variable is used.";
 
@@ -136,6 +137,7 @@ function printPhpTrav($string1)
 {
     $pos = strpos($string1,"PHP");
     echo substr($string1,$pos,3);
+    
 }
 
 function lengths($string1,$string2)
@@ -157,7 +159,13 @@ function stringFile($string1)
 
 function globalVar()
 {
-    print_r($GLOBALS); 
+    //print_r($GLOBALS); 
+    $ip = getenv('REMOTE_ADDR');
+
+// Or simply use a Superglobal ($_SERVER or $_ENV)
+    $ip = $_SERVER['GLOBAL'];
+    
+    echo $ip;
 }
 
 function dateComp()
@@ -170,9 +178,9 @@ function dateComp()
         echo "12/4/2010 is less than 12/5/2011";
     }
     
-    $diff = (abs(strtotime($date2) - strtotime($date1)))/(60 * 60 * 24);
-
-    echo "<br/>$diff";
+    $interval = $date1->diff($date2);
+    echo "<br /> Difference=>".$interval->format('%R%a days');
+    
         
     
 }
@@ -182,6 +190,12 @@ function twentyDays()
     $date = strtotime("+20 day", strtotime(date("Y/m/d")));
     return date("Y/m/d", $date);
     
+}
+
+function dateToArray()
+{
+     array_push(date('Y-m-d'),$array);
+     echo $array;
 }
 ?>
 <table border="1px">
@@ -208,10 +222,10 @@ function twentyDays()
     <tr><td>15. Create file & write string 1 to that file using PHP functions.</td><td><?php stringFile($string1);?></td></tr>
     <tr><td>16. Print all Global varibles provided by PHP</td><td><?php globalVar();?></td></tr>
     <tr><td>17. Usage and examples of Header (PHP)</td><td></td></tr>
-    <tr><td>18. Redirect page 1 to page 2.</td><td></td></tr>
+    <tr><td>18. Redirect page 1 to page 2.</td><td>We have to remove a comment</td></tr>
     <tr><td>19. Compare two dates. (12-4-2010 & 12-5-2011). Calculate the days between these two dates.</td><td><?php dateComp();?></td></tr>
     <tr><td>20. Print date after 20 days from current date</td><td><?php echo twentyDays();?></td></tr>
-    <tr><td>21. Print date in array format.</td><td></td></tr>
+    <tr><td>21. Print date in array format.</td><td><?php echo dateToArray();?></td></tr>
    
         
     
