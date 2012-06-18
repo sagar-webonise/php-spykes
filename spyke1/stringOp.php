@@ -93,6 +93,63 @@ function divideAndComb($string)
 {
     $array = explode(".",$string); 
     
+    $array_r = array_reverse($array);
+    $combined = "";
+    foreach($array_r as $item)
+    {
+      $combined = $combined.$item;      
+    }
+    echo $combined;
+    
+}
+
+function removeHtml($string)
+{
+        
+    while(1)
+    {
+    $pos1 = strpos($string, '<');
+    $pos2 = strpos($string, '>');
+    
+    if($pos1!=false && $pos2!=false && ($pos1<$pos2))
+    {
+     while($pos1!=$pos2)
+     {
+     $string[$pos1]='';
+     $pos1++;     
+     
+     }
+        
+    }
+    else
+        break;
+    }
+    
+    echo $string;
+    
+}
+
+
+function printPhpTrav($string1)
+{
+    $pos = strpos($string1,"PHP");
+    echo substr($string1,$pos,3);
+}
+
+function lengths($string1,$string2)
+{
+    echo "Length of String1=> ".strlen($string1)."  characters";
+    echo "<br />Length of String2=> ".strlen($string2)."  characters";
+    
+}
+
+function strinFile($string1)
+{
+    $file = "string1.txt";
+    $fp = fopen($file, 'w');
+    fwrite($fp, $string1);
+    fclose($fp);
+    
 }
 ?>
 <table border="1px">
@@ -113,10 +170,10 @@ function divideAndComb($string)
     <tr><td>9. add 7 days in current date</td><td><?php echo sevenDays() ?></td></tr>
     <tr><td>10. Cut the string 1 into 4 parts & print it.</td><td><?php spliteFour($string1) ?></td></tr>
     <tr><td>11. Divide the string 1 by occurances of '.'. Combine the array in reverse word sequence</td><td><?php divideAndComb($string1) ?></td></tr>
-    <tr><td>12. Remove the HTML characters from string.</td><td></td></tr>
-    <tr><td>13. Print the 'PHP' word from string 1 by traversing it using string functions</td><td></td></tr>
-    <tr><td>14. Find the length of string 1 & 2</td><td></td></tr>
-    <tr><td>15. Create file & write string 1 to that file using PHP functions.</td><td></td></tr>
+    <tr><td>12. Remove the HTML characters from string.</td><td><?php removeHtml($string1);?></td></tr>
+    <tr><td>13. Print the 'PHP' word from string 1 by traversing it using string functions</td><td><?php printPhpTrav($string1);?></td></tr>
+    <tr><td>14. Find the length of string 1 & 2</td><td><?php lengths($string1,$string2);?></td></tr>
+    <tr><td>15. Create file & write string 1 to that file using PHP functions.</td><td><?php strinFile($string1);?></td></tr>
     <tr><td>16. Print all Global varibles provided by PHP</td><td></td></tr>
     <tr><td>17. Usage and examples of Header (PHP)</td><td></td></tr>
     <tr><td>18. Redirect page 1 to page 2.</td><td></td></tr>
