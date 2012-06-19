@@ -1,13 +1,7 @@
 <?php
 
-function secureSuperGlobalPOST(&$value, $key)
-    {
-        $_POST[$key] = htmlspecialchars(stripslashes($_POST[$key]));
-        $_POST[$key] = str_ireplace("script", "blocked", $_POST[$key]);
-        $_POST[$key] = mysql_escape_string($_POST[$key]);
-        return $_POST[$key];
-    }
-    
+require_once('nocsrf.php');
+session_start();
 function affection()
 {
     //error_reporting(E_ALL);
@@ -18,12 +12,26 @@ function affection()
         die('Could not connect: ' . mysql_error());
     else{
          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+           try
+                {
+                    // Run CSRF check, on POST data, in exception mode, with a validity of 10 minutes, in one-time mode.
+                    NoCSRF::check( 'csrf_token', $_POST, true, 60*10, false );
+                 
+                }
+                catch ( Exception $e )
+                {
+                    echo "CSRF attack detected$e";
+                }           
              $username = $_POST['username'];
+             $password = crypt($_POST['password']);
+             echo "Encrypted password : $password";
              if($username!="")
              {
+                
                 $username = htmlspecialchars(stripslashes($username));
                 $username = str_ireplace("script", "blocked", $username);
                 $username = mysql_escape_string($username);
+                
                 $query = "select * from user where username='$username';";
                
                 $result = mysql_query($query);

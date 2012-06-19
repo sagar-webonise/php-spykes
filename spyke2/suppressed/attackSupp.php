@@ -3,7 +3,23 @@
 
 class Attack{
     
-var $token;
+public $token="";
+
+function unregister_globals()
+ { if (ini_get('register_globals')) {
+        $array = array('_REQUEST', '_FILES');
+        foreach ($array as $value) {
+            if(isset($GLOBALS[$value])){
+                foreach ($GLOBALS[$value] as $key => $var) {
+                    if (isset($GLOBALS[$key]) && $var === $GLOBALS[$key]) {
+                        //echo 'found '.$key.' = '.$var.' in $'.$value."\n";                    
+                        unset($GLOBALS[$key]);
+                    }
+                }
+            }
+        }
+    }
+}
 function csrfAtk(){
        session_start();
        require_once('nocsrf.php');
@@ -17,28 +33,35 @@ function affection()
         die('Could not connect: ' . mysql_error());
     else{
          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-             try
-                {
-                    // Run CSRF check, on POST data, in exception mode, with a validity of 10 minutes, in one-time mode.
-                    NoCSRF::check( 'csrf_token', $_POST, true, 60*10, false );
-                 
-                }
-                catch ( Exception $e )
-                {
-                    echo "CSRF attack detected";
-                }
-             
-             
-             
              $name = $_POST['comment'];
+             if (get_magic_quotes_gpc())
+               {
+                  function magicQuotes_awStripslashes(&$value, $key) {$value = stripslashes($value);}
+                  $gpc = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+                  array_walk_recursive($gpc, 'magicQuotes_awStripslashes');
+                 echo "magic Quates are enabled";
+               }
+             else
+                 echo "magic Quates are disabled";
              if($name!="")
              {
              mysql_query("insert into comments (name) values('$name');");
             }
+            
+            
+            //error reporting 
+            try  {
+                  $ss=2;
+             }
+                catch(Exception $e){
+                    echo "Sorry Server has internal problem";
+             }
+       
+            }
          }
 
      }
-}
+
 
 
 function xss()
@@ -63,6 +86,7 @@ function xss()
 $inst = new Attack();
 $inst->affection();
 $inst->csrfAtk();
+$inst->unregister_globals();
 ?>
 
 <html>
@@ -102,7 +126,14 @@ $inst->csrfAtk();
             </form>
            
             </div>
+        <form action="fileUpload.php" method="post" enctype="multipart/form-data">
+            <label for="file">Filename:</label>
+            <input type="file" name="file" id="file" /> 
+            <br />
+            <input type="submit" name="submit" value="Submit" onclick="javascript:document.commentForm.submit();" />
+    </form>
         <br />
+        
         <div id="showcomment">
             <h3>All Comments:</h3>
             

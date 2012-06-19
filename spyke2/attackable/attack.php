@@ -12,6 +12,7 @@ function affection()
     else{
          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              $name = $_POST['comment'];
+             
              if($name!="")
              {
              mysql_query("insert into comments (name) values('$name');");
