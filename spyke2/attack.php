@@ -1,27 +1,23 @@
 
 <?php
+
 function affection()
 {
-   $link = mysql_connect('localhost', 'root', 'root');
+    $link = mysql_connect('localhost', 'root', 'root');
+    mysql_select_db("phpSpyke2");
     if (!$link) 
         die('Could not connect: ' . mysql_error());
     else{
-         if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
-             echo "Posted";
-    }
-    mysql_select_db("phpSpyke2");
-    $tables = mysql_query("show tables from phpSpyke2;");
-   
-   while ($row = mysql_fetch_row($tables)) {
-    echo "Table: $row[0]\n";
-    }
-  
-    }
- 
+         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+             $name = $_POST['comment'];
+             if($name!="")
+             {
+             mysql_query("insert into comments (name) values('$name');");
+            }
+         }
 
-
+     }
 }
-
 affection();
 ?>
 
@@ -64,6 +60,17 @@ affection();
         <br />
         <div id="showcomment">
             <h3>All Comments:</h3>
+            
+            <?php 
+            $result = mysql_query("select * from comments;");
+            $counter = 0;
+            while ($row = mysql_fetch_row($result)) {
+                echo "can Affect: <div class='innerComment'>$counter)<br />  $row[0]</div>";
+                echo "Suppressed :<div class='innerComment'>$counter)<br />".htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8')."</div>";
+               $counter++;
+            }
+
+            ?>
         </div>
         </div>
     

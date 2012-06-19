@@ -35,3 +35,12 @@
      padding: 20px;
     
 }
+
+.innerComment{
+     border:  black solid thin ;
+     min-height: 50px;
+     min-width: 200px;
+     clear: both;
+     padding: 20px;
+    
+}
