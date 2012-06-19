@@ -2,5 +2,5 @@ create table comments(
 name varchar(1000) );
 
 create table user(
-username varchar(200)
-);
+username varchar(200);
+)
