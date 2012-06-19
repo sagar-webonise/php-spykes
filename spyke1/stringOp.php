@@ -182,8 +182,8 @@ function globalVar()
 
 function dateComp()
 {
-    $date1 =new DateTime("12/4/2010");
-    $date2 =new DateTime("12/5/2011");
+    $date1 =new DateTime("12-4-2010");
+    $date2 =new DateTime("12-5-2011");
    if($date1>$date2)
         echo "12/4/2010 is greater than 12/5/2011";
     else {
@@ -192,9 +192,6 @@ function dateComp()
     
     $interval = $date1->diff($date2);
     echo "<br /> Difference=>".$interval->format('%R%a days');
-    
-        
-    
 }
 
 function twentyDays()
