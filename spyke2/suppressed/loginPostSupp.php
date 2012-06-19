@@ -21,11 +21,13 @@ function affection()
              $username = $_POST['username'];
              if($username!="")
              {
-                
+                $username = htmlspecialchars(stripslashes($username));
+                $username = str_ireplace("script", "blocked", $username);
+                $username = mysql_escape_string($username);
                 $query = "select * from user where username='$username';";
                
                 $result = mysql_query($query);
-                if($result)
+                if(mysql_num_rows($result))
                 {
                     while($rows = mysql_fetch_row($result))
                     {

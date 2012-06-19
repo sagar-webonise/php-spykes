@@ -13,10 +13,10 @@ function affection()
              if($username!="")
              {
                 
-                $query = "select * from user where username='$username';dsd";
-               
+                $query = "select * from user where username='$username';";
+                echo $query;
                 $result = mysql_query($query);
-                echo mysql_num_rows($result);
+            
                 if(mysql_num_rows($result))
                 {
                     while($rows = mysql_fetch_row($result))
