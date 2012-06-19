@@ -1,0 +1,2 @@
+create table comments
+name varchar(1000) ;
