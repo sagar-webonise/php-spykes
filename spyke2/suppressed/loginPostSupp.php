@@ -20,11 +20,11 @@ function affection()
                 }
                 catch ( Exception $e )
                 {
-                    echo "CSRF attack detected$e";
+                    echo "CSRF attack detected";
                 }           
              $username = $_POST['username'];
              $password = crypt($_POST['password']);
-             echo "Encrypted password : $password";
+            
              if($username!="")
              {
                 
@@ -42,7 +42,7 @@ function affection()
                         foreach($rows as $row)
                            echo "<br/>$row";
                     }
-
+                     echo "<br />Encrypted password : $password";
                 }else{
                     
                     echo "No Data Found";
