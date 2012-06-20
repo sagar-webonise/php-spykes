@@ -1,0 +1,5 @@
+create table category(
+no int ,
+name varchar(20),
+totalItems int
+);

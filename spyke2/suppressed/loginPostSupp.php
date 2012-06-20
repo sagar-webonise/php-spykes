@@ -23,7 +23,7 @@ function affection()
                     echo "CSRF attack detected";
                 }           
              $username = $_POST['username'];
-             $password = crypt($_POST['password']);
+             $password = md5($_POST['password']);
             
              if($username!="")
              {

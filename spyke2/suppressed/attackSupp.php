@@ -5,6 +5,7 @@ class Attack{
     
 public $token="";
 
+//register globals 
 function unregister_globals()
  { if (ini_get('register_globals')) {
         $array = array('_REQUEST', '_FILES');
@@ -49,15 +50,11 @@ function affection()
             }
             
             
-            //error reporting 
-            try  {
-                  $ss=2;
-             }
-                catch(Exception $e){
-                    echo "Sorry Server has internal problem";
-             }
+           
+            
        
             }
+            
          }
 
      }
@@ -76,17 +73,29 @@ function xss()
             }
     
 }
-}
 
+
+
+function  formSpoof()
+{
+    //if strcmp("")
+   $check =  $_SERVER['HTTP_REFERER'];
+   if(strcmp($check,"http://localhost/php-spykes/"))
+        echo "Form is spoofed";
+   
+    
+    
+}
     
 
-
+}
 
 
 $inst = new Attack();
 $inst->affection();
 $inst->csrfAtk();
 $inst->unregister_globals();
+$inst->formSpoof();
 ?>
 
 <html>
