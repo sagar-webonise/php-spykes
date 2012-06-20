@@ -1,0 +1,26 @@
+Spike 2 
+Hey Guys,
+
+Note : Please reply back on the same mail trail while submitting assignments.
+@Priyanka , @Mady and @madhavi : You guys also please send the daily assignment on the same mail trail. So that it will be easy to find out.
+
+This is your Spike 2 for "Security, PEAR, PECL and Advance OOPS"
+
+1) Read About Security & Security attacks in our application. make an programs on how we can prevent this security attack for following attack. Do this using class make different function for each attack.
+    1.    XSS
+    2.    SQL Injection
+    3.    Spoofed Form Input
+    4.    CSRF
+    5.    File Uploads
+    6.    Including Files
+    7.    eval()
+    8.    Register Globals
+    9.    Magic Quotes
+   10.    Error Reporting
+   11.    Plain Text Passwords
+2) Real About PEAR & PECL. check the PEAr packages & list down them with there uses.
+3) Create small programs for
+    1) Interface
+    2) Abstract Classes 
+    3) Polymorphism
+4) Read about SPL (Standard PHP Library)

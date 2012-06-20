@@ -47,5 +47,7 @@
 
 #pdotable{
     
-    
+    width: 500px;
+    min-height: 600px;
+    floa:center;
 }

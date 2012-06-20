@@ -1,0 +1,18 @@
+Hey Everyone,
+Below is the Assignment for Spike -3 (PDO )
+
+PDO Assignment:
+
+# Refer link http://www.phpro.org/tutorials/Introduction-to-PHP-PDO.html
+# Run and execute example on pdo functions:
+ 1) Connection to db
+ 2) Close the connection
+ 3) Fetch mode: Assoc, Num,Both,Object,Lazy,CLass
+ 4) Error handling
+ 5) Prepand
+ 6) Transaction
+ 7) Get last insert Id
+
+The programs should follow the Oops concept.
+
+Also, everyone has to create one small document on spreadsheet by explaining each function used in few lines.
