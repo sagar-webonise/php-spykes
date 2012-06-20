@@ -93,23 +93,45 @@ class Implemenation{
     }
     
    public function errorHand()
-    {   set_error_handler('my_error_handler');
-        set_exception_handler('my_exception_handler');
+    {   
+       
         $sq_query = "select position from category";
          try{
-                 $sql = "SELECT username FROM animals";
+             
+             try{ $a=5/0;						
+             
+             }catch(Exception $e)
+             {
+                 //throw new Exception('Problem in foobar',0,$e);
+                 echo "hereeee".$e.getMessage();
+                 
+                 }
+                 /*$sql = "SELECT username FROM animals";
 
                 foreach ( $this->pdo->query($this->sql) as $row)
                     {
                     print $row['animal_type'] .' - '. $row['animal_name'] . '<br />';
-                    }
+                    }*/
             }
          catch(PDOException $e)
          {
              echo "Hiiiiiii";
-             return "error:".$e->getMessage();
+             echo $e->getMessage();
              
          }
+        
+    }
+    
+    public function prepared()
+    {
+        $no = 299;
+        $name = "Bikes";
+        $totalItems= 300;
+        
+        $stmt = $this->pdo->prepare("SELECT * FROM category WHERE no= :number AND name = :catname");
+        $stmt->bindParam(':number', $no, PDO::PARAM_INT);
+        $stmt->bindParam(':catname', $name, PDO::PARAM_STR, 200);
+        
         
     }
     
@@ -251,7 +273,10 @@ $impl = new Implemenation();
             </td></tr>
         
         
-        <tr><td>10) Prepand</td><td></td></tr>
+        <tr><td>10) Prepared</td><td>
+                
+                
+            </td></tr>
         
         
         <tr><td>11) Transaction</td><td></td></tr>
