@@ -94,24 +94,17 @@ class Implemenation{
     
    public function errorHand()
     {   
-       
+       /*
         $sq_query = "select position from category";
          try{
              
-             try{ $a=5/0;						
              
-             }catch(Exception $e)
-             {
-                 //throw new Exception('Problem in foobar',0,$e);
-                 echo "hereeee".$e.getMessage();
-                 
-                 }
-                 /*$sql = "SELECT username FROM animals";
+                 $sql = "SELECT username FROM animals";
 
                 foreach ( $this->pdo->query($this->sql) as $row)
                     {
                     print $row['animal_type'] .' - '. $row['animal_name'] . '<br />';
-                    }*/
+                    }
             }
          catch(PDOException $e)
          {
@@ -119,22 +112,49 @@ class Implemenation{
              echo $e->getMessage();
              
          }
-        
+        */
     }
     
     public function prepared()
     {
-        $no = 299;
-        $name = "Bikes";
-        $totalItems= 300;
+        $no = 2;
+        $name = "shoes";
+        $totalItems= 299;
         
         $stmt = $this->pdo->prepare("SELECT * FROM category WHERE no= :number AND name = :catname");
         $stmt->bindParam(':number', $no, PDO::PARAM_INT);
         $stmt->bindParam(':catname', $name, PDO::PARAM_STR, 200);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result[0];
         
         
     }
     
+    public function transaction()
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->beginTransaction();
+        try{
+        $this->pdo->exec("insert into category values ('23','test2','28')");
+        $this->pdo->exec("insert into category values ('33','ds2','32')");
+        $this->pdo->rollback();
+        //$this->pdo->commit();
+        }
+        catch(Exception $e)
+        {
+            $this->pdo->rollback();
+            
+        }
+    }
+    
+    public function lastInserted()
+    { 
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $inser_q="insert into category values ('20','test','2828')";
+        $count = $this->pdo->exec($inser_q);
+        return $this->pdo->lastInsertId();
+    }
     
 }
 
@@ -160,7 +180,7 @@ $impl = new Implemenation();
                 <h4>Add Categoy info:</h4>
                 <form method ="POST" action="" name="catform">
                 <table><tr>
-                        <td>Id</td>
+                        <td>no</td>
                         <td><input type="text" name="id" ></td>
                     </tr> 
                         <tr>
@@ -275,17 +295,45 @@ $impl = new Implemenation();
         
         <tr><td>10) Prepared</td><td>
                 
+                <?php $result = $impl->prepared();
+                   foreach($result as $key=>$val)
+                            {
+                                    echo "<br/>".$key."=>".$val;
+                            }     
+        
+                ?>
+                
                 
             </td></tr>
         
         
-        <tr><td>11) Transaction</td><td></td></tr>
+        <tr><td>11) Transaction</td><td>
+                
+                <?php
+                $impl->transaction();
+                echo "transaction done";
+                ?>
+                
+                
+            </td></tr>
         
         
-        <tr><td>12) Get last insert Id</td><td></td></tr>
+        <tr><td>12) Get last insert Id</td><td>
+                <?php
+                  echo $impl->lastInserted();
+                ?>
+                
+            </td></tr>
         
         
-        <tr><td>13) Close connection</td><td></td></tr>
+        <tr><td>13) Close connection</td><td>
+                <?php
+                        $impl->pdo = null;
+                        if(!$impl->pdo)
+                            echo "connection colsed!!";
+                ?>
+                
+            </td></tr>
         
  
         
