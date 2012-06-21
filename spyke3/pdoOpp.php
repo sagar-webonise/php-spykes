@@ -14,7 +14,7 @@ class category{
            
        }
 }
-class Implemenation{
+class Implemenation extends PDOException{
     public $pdo;
     public $sql;
     public function conn()
@@ -94,7 +94,7 @@ class Implemenation{
     
    public function errorHand()
     {   
-       /*
+       
         $sq_query = "select position from category";
          try{
              
@@ -108,11 +108,11 @@ class Implemenation{
             }
          catch(PDOException $e)
          {
-             echo "Hiiiiiii";
+         
              echo $e->getMessage();
              
          }
-        */
+       
     }
     
     public function prepared()
@@ -138,13 +138,15 @@ class Implemenation{
         try{
         $this->pdo->exec("insert into category values ('23','test2','28')");
         $this->pdo->exec("insert into category values ('33','ds2','32')");
-        $this->pdo->rollback();
-        //$this->pdo->commit();
+        $this->pdo->exec("insert into category1 values ('2111','bahhhsb','2')");
+        
+        $this->pdo->commit();
+        echo "Transaction successfull";
         }
         catch(Exception $e)
         {
             $this->pdo->rollback();
-            
+            echo "Transaction failed";
         }
     }
     
@@ -311,7 +313,7 @@ $impl = new Implemenation();
                 
                 <?php
                 $impl->transaction();
-                echo "transaction done";
+                //  echo "transaction done";
                 ?>
                 
                 
