@@ -14,14 +14,14 @@ class Triangle implements Shape
     public $name;    
     public function getAttr()
     {
-        $area = 200;
-        $no = 1;
-        $name = "Triangle";
+        $this->area = 200;
+        $this->no = 1;
+        $this->name = "Triangle";
         
     }
     public function displayAttr()
     {
-        echo "No=>$no <br /> Name => $name <br/> area=> $area <br/>  " ;
+        echo "No=>$this->no <br /> Name => $this->name <br/> area=> $this->area <br/>  " ;
         
     }
     

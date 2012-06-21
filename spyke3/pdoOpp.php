@@ -203,6 +203,7 @@ $impl = new Implemenation();
                 
             </td></tr>
         <tr><td>3) Assoc</td><td><?php $result = $impl->assoc();
+            if($result)
                    foreach($result as $key=>$val)
                             {
                                     echo "<br/>".$key."=>".$val;
@@ -213,6 +214,7 @@ $impl = new Implemenation();
         
         <tr><td>4) Num</td><td>
                 <?php $result = $impl->num();
+                if($result)
                    foreach($result as $key=>$val)
                             {
                                     echo "<br/>".$key."=>".$val;
@@ -227,6 +229,7 @@ $impl = new Implemenation();
             <td>
                 
                 <?php $result = $impl->both();
+                if($result)
                    foreach($result as $key=>$val)
                             {
                                     echo "<br/>".$key."=>".$val;
@@ -261,6 +264,7 @@ $impl = new Implemenation();
         <tr><td>7) Lazy</td><td>
                 
                 <?php $result = $impl->lazy();
+                if($result)
                    foreach($result as $key=>$val)
                             {
                                     echo "<br/>".$key."=>".$val;
@@ -274,6 +278,7 @@ $impl = new Implemenation();
         
         <tr><td>8) Class</td><td>
                 <?php $result = $impl->classs();
+                if($result)
                    foreach($result as $item)
                             {
                                     echo $item->concate();
@@ -298,6 +303,7 @@ $impl = new Implemenation();
         <tr><td>10) Prepared</td><td>
                 
                 <?php $result = $impl->prepared();
+                if($result)
                    foreach($result as $key=>$val)
                             {
                                     echo "<br/>".$key."=>".$val;
